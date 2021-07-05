@@ -3,23 +3,28 @@ let data = {
     books: [
         {
             name: "LOTR The Fellowship of The Ring",
-            path: "lotr1.txt"
+            path: "lotr1.txt",
+            img: "lotr1.jpg"
         },
         {
             name: "LOTR The Two Towers",
-            path: "lotr2.txt"
+            path: "lotr2.txt",
+            img: "lotr2.jpg"
         },
         {
             name: "LOTR The Return Of The King",
-            path: "lotr3.txt"
+            path: "lotr3.txt",
+            img: "lotr3.jpg"
         },
         {
             name: "Harry Potter Book 1",
-            path: "hp1.txt"
+            path: "hp1.txt",
+            img: "hp1.jpg",
         },
         {
             name: "Game Of Thrones",
-            path: "got1.txt"
+            path: "got1.txt",
+            img: "got1.jpg"
         },
         
     ]
@@ -37,8 +42,8 @@ else {
     console.log("loaded save")
 }
 
-// let url = "http://localhost:8000/texts/"
-let url = "https://ideas.andyhsmith.com/translate/texts/"
+let url = "http://localhost:8000/texts/"
+// let url = "https://ideas.andyhsmith.com/translate/texts/"
 
 function clamp(number, min, max) {
     return Math.min(Math.max(number, min), max);
@@ -91,7 +96,7 @@ function pageDOM() {
         let word = splitText[i + paginator.currentPage * paginator.pageSize]
         let savedWord = splitText[i + paginator.currentPage * paginator.pageSize]
         // console.log(word)
-        content += "<span ontouchmove class='"
+        content += "<span tabindex=0 ontouchmove class='"
         if(languages[selDict].hasOwnProperty(word.toLowerCase())) {          
             word = languages[selDict][word.toLowerCase()]
             content += "translated-word ht'>"
@@ -141,7 +146,14 @@ function removeTranslatedWord(word) {
 
 function clickedEnglishWord(word) {
     word = word.toLowerCase()
-    translation = prompt("Translation for '" + word + "':")
+    translation = prompt("Translation for '" + word + "':").toLowerCase()
+    while (translation.charAt(0) == " ") {
+        translation = translation.substring(1)
+    }
+    while (translation.charAt(-1) == " ") {
+        translation = translation.slice(1, -1)
+    }
+
     if (translation != null && translation != "") {
         languages[selDict][word] = translation
         pageDOM()
@@ -153,7 +165,12 @@ function clickedEnglishWord(word) {
 function textOptionDOMS() {
     let content = ""
     for (let i in data.books) {
-        content += "<button onclick='getText(\"" + data.books[i].path + "\")'>" + data.books[i].name + "</button>"
+        content += "<button class='book-option' onclick='getText(\"" + data.books[i].path + "\")'>"
+        if (data.books[i].img) {
+            content += "<img src='images/" + data.books[i].img + "'>" 
+        }
+        
+        content += data.books[i].name + "</button>"
     }
     document.getElementById("text-options").innerHTML = content;
 }

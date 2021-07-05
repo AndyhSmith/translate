@@ -25,6 +25,15 @@ body {
     display:block;
 }
 
+.ht:focus .tooltip {
+    display:block;
+}
+
+.ht:focus {
+    outline: none;
+}
+
+
 .tooltip {
     display: none;
     color: white;
@@ -43,4 +52,14 @@ body {
     margin-left: auto;
     margin-right: auto;
     
+}
+
+.book-option img {
+    width: 100%;
+    display: block;
+}
+
+.book-option {
+    width: 150px;
+    vertical-align: top;
 }
