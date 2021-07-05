@@ -37,8 +37,8 @@ else {
     console.log("loaded save")
 }
 
-// let url = "http://localhost:8000/texts/"
-let url = "https://ideas.andyhsmith.com/translate/texts/"
+let url = "http://localhost:8000/texts/"
+// let url = "https://ideas.andyhsmith.com/translate/texts/"
 
 function clamp(number, min, max) {
     return Math.min(Math.max(number, min), max);
@@ -91,7 +91,7 @@ function pageDOM() {
         let word = splitText[i + paginator.currentPage * paginator.pageSize]
         let savedWord = splitText[i + paginator.currentPage * paginator.pageSize]
         // console.log(word)
-        content += "<span class='"
+        content += "<span ontouchmove class='"
         if(languages[selDict].hasOwnProperty(word.toLowerCase())) {          
             word = languages[selDict][word.toLowerCase()]
             content += "translated-word ht'>"
@@ -110,19 +110,21 @@ function pageDOM() {
     }
 
     document.getElementById("app-content").innerHTML = content;
-    document.getElementById("paginator").innerHTML = "<button onclick='previousPage()'> Previous</button> " + paginator.currentPage + "/" + paginator.numberOfPages + " <button onclick='nextPage()'> Next</button>"; 
+    let pagContent = "<button onclick='previousPage()'> Previous</button> " + paginator.currentPage + "/" + paginator.numberOfPages + " <button onclick='nextPage()'> Next</button>"
+    document.getElementById("paginator").innerHTML = pagContent; 
+    document.getElementById("paginator2").innerHTML = pagContent; 
 }
 
 function nextPage() {
     if (paginator.currentPage < paginator.numberOfPages) {
-        paginator.currentPage += 1
+        paginator.currentPage = paginator.currentPage + 1
         pageDOM()
     }
 }
 
 function previousPage() {
     if (paginator.currentPage > 0) {
-        paginator.currentPage -= 1
+        paginator.currentPage = paginator.currentPage - 1
         pageDOM()
     }
     
@@ -157,9 +159,12 @@ function textOptionDOMS() {
 }
 
 function goToTargetPage() {
-    let targetPageUnverified = document.getElementById("target-page").value
+    console.log("test")
+    let targetPageUnverified = parseInt(document.getElementById("target-page").value)
+    console.log(targetPageUnverified)
     document.getElementById("target-page").value = ""
     if (targetPageUnverified <= paginator.numberOfPages) {
+        console.log("Checked")
         paginator.currentPage = targetPageUnverified
         pageDOM()
     }
