@@ -34,18 +34,21 @@ body {
 }
 
 
+
 .tooltip {
+   
     display: none;
     color: white;
     font-weight: bold;
     /*margin-left: 28px;  moves the tooltip to the right */
     /*margin-top: 15px;  moves it down */
-    position: fixed;
+    position: absolute;
     background-color: rgba(0,0,0,.8);
     width: 100%;
     z-index: 1000;
     text-align: center;
     left: 0px;
+    /* bottom: 0px; */
 }
 body {
     max-width: 800px;
@@ -62,4 +65,10 @@ body {
 .book-option {
     width: 150px;
     vertical-align: top;
+    display: inline-block;
+    padding: 10px;
+}
+
+.book-option:hover {
+    background-color:rgba(0, 0, 0, 0.2)
 }

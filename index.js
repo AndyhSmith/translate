@@ -96,7 +96,7 @@ function pageDOM() {
         let word = splitText[i + paginator.currentPage * paginator.pageSize]
         let savedWord = splitText[i + paginator.currentPage * paginator.pageSize]
         // console.log(word)
-        content += "<span tabindex=0 ontouchmove class='"
+        content += "<span  ontouchmove class='"
         if(languages[selDict].hasOwnProperty(word.toLowerCase())) {          
             word = languages[selDict][word.toLowerCase()]
             content += "translated-word ht'>"
@@ -118,19 +118,24 @@ function pageDOM() {
     let pagContent = "<button onclick='previousPage()'> Previous</button> " + paginator.currentPage + "/" + paginator.numberOfPages + " <button onclick='nextPage()'> Next</button>"
     document.getElementById("paginator").innerHTML = pagContent; 
     document.getElementById("paginator2").innerHTML = pagContent; 
+
+    
 }
 
 function nextPage() {
     if (paginator.currentPage < paginator.numberOfPages) {
         paginator.currentPage = paginator.currentPage + 1
         pageDOM()
+        document.getElementById('paginator').scrollIntoView();
     }
+    
 }
 
 function previousPage() {
     if (paginator.currentPage > 0) {
         paginator.currentPage = paginator.currentPage - 1
         pageDOM()
+        document.getElementById('paginator').scrollIntoView();
     }
     
 }
@@ -165,12 +170,12 @@ function clickedEnglishWord(word) {
 function textOptionDOMS() {
     let content = ""
     for (let i in data.books) {
-        content += "<button class='book-option' onclick='getText(\"" + data.books[i].path + "\")'>"
+        content += "<div class='book-option' onclick='getText(\"" + data.books[i].path + "\")'>"
         if (data.books[i].img) {
             content += "<img src='images/" + data.books[i].img + "'>" 
         }
         
-        content += data.books[i].name + "</button>"
+        content += data.books[i].name + "</div>"
     }
     document.getElementById("text-options").innerHTML = content;
 }
