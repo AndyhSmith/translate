@@ -42,8 +42,8 @@ else {
     console.log("loaded save")
 }
 
-let url = "http://localhost:8000/texts/"
-// let url = "https://ideas.andyhsmith.com/translate/texts/"
+// let url = "http://localhost:8000/texts/"
+let url = "https://ideas.andyhsmith.com/translate/texts/"
 
 function clamp(number, min, max) {
     return Math.min(Math.max(number, min), max);
