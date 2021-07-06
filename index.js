@@ -3,28 +3,39 @@ let data = {
     books: [
         {
             name: "LOTR The Fellowship of The Ring",
-            path: "lotr1.txt",
-            img: "lotr1.jpg"
+            path: "lotr1",
+            img: "lotr1.jpg",
+            locked: true,
         },
         {
             name: "LOTR The Two Towers",
-            path: "lotr2.txt",
-            img: "lotr2.jpg"
+            path: "lotr2",
+            img: "lotr2.jpg",
+            locked: true,
         },
         {
             name: "LOTR The Return Of The King",
-            path: "lotr3.txt",
-            img: "lotr3.jpg"
+            path: "lotr3",
+            img: "lotr3.jpg",
+            locked: true,
         },
         {
             name: "Harry Potter Book 1",
-            path: "hp1.txt",
+            path: "hp1",
             img: "hp1.jpg",
+            locked: true,
         },
         {
             name: "Game Of Thrones",
-            path: "got1.txt",
-            img: "got1.jpg"
+            path: "got1",
+            img: "got1.jpg",
+            locked: true,
+        },
+        {
+            name: "The Count of Monte Cristo",
+            path: "comc",
+            img: "comc.jpg",
+            locked: false,
         },
         
     ]
@@ -51,14 +62,18 @@ function clamp(number, min, max) {
 
 function getText(text){
     // read text from URL location
-    var request = new XMLHttpRequest();
-    request.open('GET', url + text, true);
-    request.send(null);
-    request.onreadystatechange = function () {
-        selectedText = request.response
-        txtToArray()
-        pageDOM()
-    }
+    fetch('https://andyhsmith.com/api/comc/h0rntail')
+    .then(response => response.json())
+    .then(data => console.log(data));
+
+    // var request = new XMLHttpRequest();
+    // request.open('GET', url + text, true);
+    // request.send(null);
+    // request.onreadystatechange = function () {
+    //     selectedText = request.response
+    //     txtToArray()
+    //     pageDOM()
+    // }
 }
 
 
